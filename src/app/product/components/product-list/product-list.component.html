@@ -1,0 +1,13 @@
+<h2>Products</h2>
+<p *ngIf="products?.length===0">No products</p>
+<ol>
+    <li *ngFor="let item of products">
+        <app-product (addProductToCartEvent)="onAddToCart($event)"
+            [name]="item.name"
+            [description]="item.description"
+            [price]="item.price"
+            [category]="item.category"
+            [isAvailable]="item.isAvailable"
+        ></app-product>
+    </li>
+</ol>

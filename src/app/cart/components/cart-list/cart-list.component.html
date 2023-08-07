@@ -1,0 +1,6 @@
+<h2>Cart</h2>
+<h3 *ngIf="products?.size===0">Cart is empty</h3>
+<ol>
+    <li *ngFor="let item of products">{{item.name}}</li>
+</ol>
+ss
