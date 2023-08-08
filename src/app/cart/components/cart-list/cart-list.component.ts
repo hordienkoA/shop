@@ -10,4 +10,6 @@ import { Product } from 'src/app/product/models/product.model';
 
 export class CartListComponent {
   @Input() products?: Set<Product>; 
+
+  trackByItems(index: number, item: Product): string { return item.name; }
 }
