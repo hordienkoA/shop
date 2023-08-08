@@ -1,9 +1,10 @@
+<!-- Не нужно использовать this -->
 <app-first
-[name] = "this.product.name"
-[description]="this.product.description"
-[price]="this.product.price"
-[category]="this.product.category"
-[isAvailable]="this.product.isAvailable"
+[name] = "product.name"
+[description]="product.description"
+[price]="product.price"
+[category]="product.category"
+[isAvailable]="product.isAvailable"
 ></app-first>
 <app-product-list [products]="productService.getProducts()" (addProductToCartEvent)="addToCart($event)"></app-product-list>
 <br>

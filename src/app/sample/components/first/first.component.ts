@@ -11,6 +11,4 @@ export class FirstComponent {
   @Input() price?: number;
   @Input() category?: Category;
   @Input() isAvailable?: boolean;
-
-
 }

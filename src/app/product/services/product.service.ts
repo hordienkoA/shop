@@ -12,8 +12,8 @@ export class ProductService {
     new Product(1, "Samsung M52", "Phone", 400, Category.Phone, true),
     new Product(2, "Playstation 5 Pro", "Game Console(will be in future)", 800, Category.GameConsole, false)
   ]
-  constructor() { }
-  public getProducts(){
+
+  getProducts() {
     return this.products;
   }
 }
