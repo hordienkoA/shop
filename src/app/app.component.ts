@@ -9,7 +9,10 @@ import { Product } from './product/models/product.model';
 })
 export class AppComponent implements OnInit {
   title = 'shop';
+  // Почему any, а не Product?
   product:any;
+
+  // С множествои не так удобно работать, как с массивом
   cartItems: Set<Product>= new Set<Product>();
 
   constructor(public productService:ProductService){
@@ -25,8 +28,9 @@ export class AppComponent implements OnInit {
     this.cartItems.delete(item);
   }
 
-    ngOnInit() { 
-      // Data for first component 
+  // я обычно методы жизненного цикла пишу после конструктора
+    ngOnInit() {
+      // Data for first component
       this.product = {
         name: "Test Product",
         description: "Test description",
