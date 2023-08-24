@@ -7,7 +7,7 @@ import { Product } from 'src/app/product/models/product.model';
   styleUrls: ['./cart-list.component.css']
 })
 export class CartListComponent {
-  @Input() products?: Set<Product>;
+  @Input() products!: Array<Product>;
 
   trackByItems(index: number, item: Product): string { return item.name; }
 }

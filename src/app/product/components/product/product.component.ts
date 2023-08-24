@@ -8,19 +8,13 @@ import { Product } from '../../models/product.model';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-  // На мой взгляд лучше передать целиком объект, чем отдельные поля
-  // Если так сделать, то ниже в методе не надо будет создавать объект
-  // а можно будет сразу передать то, что пришло
-  @Input() name: string= "";
-  @Input() description?: string;
-  @Input() price?: number;
-  @Input() category?: Category;
-  @Input() isAvailable?: boolean;
+
+  @Input() product!: Product;
 
   @Output() addProductToCartEvent = new EventEmitter<Product>();
 
   onAddToCard() {
-    this.addProductToCartEvent.emit(new Product(0,this.name,this.description, this.price, this.category, this.isAvailable));
+    this.addProductToCartEvent.emit(new Product(0,this.product.name,this.product.description, this.product.price, this.product.category, this.product.isAvailable));
     console.log("Product successfully purchased");
   }
 }

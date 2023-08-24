@@ -3,11 +3,7 @@
 <ol>
     <li *ngFor="let item of products">
         <app-product (addProductToCartEvent)="onAddToCart($event)"
-            [name]="item.name"
-            [description]="item.description"
-            [price]="item.price"
-            [category]="item.category"
-            [isAvailable]="item.isAvailable"
+            [product]="item"
         ></app-product>
     </li>
 </ol>
