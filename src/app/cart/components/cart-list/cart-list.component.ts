@@ -1,13 +1,31 @@
-import { Component, Input } from '@angular/core';
-import { Product } from 'src/app/product/models/product.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CartItem } from '../../models/cart-item.model';
+import { HighlightDirective } from 'src/app/shared/directives/highlight.directive';
 
 @Component({
   selector: 'app-cart-list',
   templateUrl: './cart-list.component.html',
-  styleUrls: ['./cart-list.component.css']
+  styleUrls: ['./cart-list.component.css'],
 })
-export class CartListComponent {
-  @Input() products!: Array<Product>;
 
-  trackByItems(index: number, item: Product): string { return item.name; }
+export class CartListComponent {
+  @Input() cartItems!: Array<CartItem>;
+  @Input() totalQuantity!: number;
+  @Input() totalSum!: number;
+  @Output() QuantityDecrease = new EventEmitter<CartItem>();
+  @Output() QuantityIncrease = new EventEmitter<CartItem>();
+  @Output() DeleteItem = new EventEmitter<CartItem>();
+
+  onQuantityIncrease(cartItem: CartItem){
+    this.QuantityIncrease.emit(cartItem);
+  }
+
+  onQuantityDecrease(cartItem: CartItem){
+    this.QuantityDecrease.emit(cartItem);
+  }
+
+  onDeleteItem(cartItem: CartItem){
+    this.DeleteItem.emit(cartItem);
+  }
+  trackByItems(index: number, item: CartItem): string { return item.product.name; }
 }

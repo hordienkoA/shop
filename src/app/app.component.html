@@ -1,11 +1,23 @@
-<!-- Не нужно использовать this -->
-<app-first
-[name] = "product.name"
-[description]="product.description"
-[price]="product.price"
-[category]="product.category"
-[isAvailable]="product.isAvailable"
-></app-first>
-<app-product-list [products]="productService.getProducts()" (addProductToCartEvent)="addToCart($event)"></app-product-list>
+<h1 #appTitle></h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <app-product-list [products]="productService.getProducts()"></app-product-list>
+        </div>
+        <div class="col-md-4">
+            <div class="cart-panel">
+                <button class="btn btn-primary cart-toggle" data-bs-toggle="collapse" data-bs-target="#cartPanel">
+                    Cart
+                </button>
+
+                <div id="cartPanel" class="collapse">
+                    <app-cart-list [cartItems]="cartItems" (QuantityIncrease)="onIncreaseQuantityOfCartItems($event)"
+                        (QuantityDecrease)="onDecreaseQuantityOfCartItems($event)" (DeleteItem)="onDeleteItemFromCart($event)" [totalSum]="cartService.totalCost"
+                        [totalQuantity]="cartService.totalQuantity">
+                    </app-cart-list>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <br>
-<app-cart-list [products]="cartItems" ></app-cart-list>

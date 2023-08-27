@@ -3,5 +3,6 @@ export enum Category{
     PC,
     TV,
     Furniture,
-    GameConsole
+    GameConsole,
+    ChargingDevices
 }

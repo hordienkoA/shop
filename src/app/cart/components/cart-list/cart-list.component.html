@@ -1,5 +1,11 @@
 <h2>Cart</h2>
-<h3 *ngIf="products?.length===0">Cart is empty</h3>
-<ol>  
-    <li *ngFor="let item of products; trackBy: trackByItems">{{item.name}}</li>
+<h3 *ngIf="cartItems.length===0">Cart is empty</h3>
+<h4 *ngIf="cartItems.length>0">Total Sum: {{totalSum}} $, Total Quantity: {{totalQuantity}}</h4>
+<ol>
+    <li *ngFor="let item of cartItems; trackBy: trackByItems">
+        <app-cart-item class="cart-item" [cartItem]="item" (QuantityIncrease)="onQuantityIncrease($event)"
+            (QuantityDecrease)="onQuantityDecrease($event)" (DeleteItem)="onDeleteItem($event)"></app-cart-item>
+        <br />
+        <br>
+    </li>
 </ol>

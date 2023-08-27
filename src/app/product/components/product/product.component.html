@@ -1,8 +1,11 @@
-<ul>
-    <li>name: {{product.name}}</li>
-    <li>description: {{product.description}}</li>
-    <li>price: {{product.price}}</li>
-    <li>category: {{product.category}}</li>
-    <li>is available: {{product.isAvailable}}</li>
-</ul>
-<button (click)="onAddToCard()">Buy</button>
+<div class="card mb-4">
+    <img alt="images will be in future" class="card-img-top">
+    <div class="card-body">
+        <h5 class="card-title">{{product.name}}</h5>
+        <p class="card-text">{{product.description}}</p>
+        <p class="card-text">${{product.price}}</p>
+        <p class="card-text">{{product.isAvailable? "Available" : "Not available"}}</p>
+        <button class="btn" [ngClass]="{'btn-success':product.isAvailable}" [disabled]="!product.isAvailable" (click)="onAddToCard()">Buy</button>
+
+    </div>
+</div>
