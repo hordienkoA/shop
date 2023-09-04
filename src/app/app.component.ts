@@ -9,11 +9,10 @@ import { CartItem } from './cart/models/cart-item.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements AfterViewInit {
   title = 'shop';
   product!: Product;
 
-  cartItems: Array<CartItem> = [];
   @ViewChild('appTitle', {static:false, read: ElementRef}) appTitle!: ElementRef<HTMLHeadingElement>;
 
   constructor(public productService: ProductService, 
@@ -22,10 +21,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngOnInit() {
-    this.cartItems = this.cartService.getCartList();
+  get cartItems(){
+    return this.cartService.getProducts();
   }
-
   ngAfterViewInit() {
     if(this.appTitle){
       this.appTitle.nativeElement.textContent = "Shop";
@@ -33,14 +31,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   onIncreaseQuantityOfCartItems(item: CartItem){
-    this.cartService.addToCart(item.product);
+    this.cartService.addProduct(item.product);
   }
 
   onDecreaseQuantityOfCartItems(item: CartItem){
-    this.cartService.removeFromCart(item.product);
+    this.cartService.removeProduct(item.product);
   }
 
   onDeleteItemFromCart(item: CartItem){
-    this.cartService.removeFromCart(item.product, true);
+    this.cartService.removeProduct(item.product, true);
   }
 }

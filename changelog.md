@@ -30,3 +30,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - markup of each cart item in cart-list component
 - some of old markup during bootstrap reworking
 - first component from app.component markup
+
+## [0.3.0] - 2023-09-03
+
+### Added
+   - new methods in cart.service to work with producs cart
+   - config-options.service that provide functionality of setting and getting config user information(id, loging,email)
+   - constant.service provide constant object for app
+   - generator.service generates random string with alphanumeric items
+   - local-storage.service provides functionality for working with local storage
+   - demo code in first.component to demonstrate functionality of services metioned above 
+   - click-style.directive that can change font style of element when click event raises

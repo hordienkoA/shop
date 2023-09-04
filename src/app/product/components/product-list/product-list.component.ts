@@ -17,6 +17,6 @@ export class ProductListComponent {
   }
 
   onAddToCart(item: Product){
-    this.cartService.addToCart(item);
+    this.cartService.addProduct(item);
   }
 }

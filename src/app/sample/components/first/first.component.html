@@ -7,3 +7,22 @@
     <li>category: {{category}}</li>
     <li>is available: {{isAvailable}}</li>
 </ul>
+<h3>Generated string</h3>
+<div>{{this.generatedString}}</div>
+<h3>Config:</h3>
+<ul>
+    <li><b>Id:</b> {{this.configOptionsService.getConfig()["id"]}}</li>
+    <li><b>Login:</b> {{this.configOptionsService.getConfig()["login"]}}</li>
+    <li><b>Email:</b> {{this.configOptionsService.getConfig()["email"]}}</li>
+</ul>
+<h3>Constant</h3>
+<ul>
+    <li><b>App: </b>{{this.constant.App}}</li>
+    <li><b>Version: </b>{{this.constant.Ver}}</li>
+    <li><b>URL: </b>{{this.constant.API_URL}}</li>
+</ul>
+<h3>Local storage controls</h3>
+<button class="btn btn-link" (click)="onSaveData()">Save Data</button>
+<button class="btn btn-link" (click)="onLoadData()">Load Data</button>
+<button class="btn btn-link" (click)="onClearData()">Clear Data</button>
+<div appClickStyle [fontSize]="'44px'">directive test(click-me)</div>

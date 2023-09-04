@@ -1,4 +1,13 @@
 <h1 #appTitle></h1>
+<div class="cart-panel">
+    <button class="btn btn-primary cart-toggle" data-bs-toggle="collapse" data-bs-target="#firstPanel">
+        First component
+    </button>
+
+    <div id="firstPanel" class="collapse">
+        <h1>First component</h1>
+        <app-first></app-first>
+    </div>
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -13,6 +22,7 @@
                 <div id="cartPanel" class="collapse">
                     <app-cart-list [cartItems]="cartItems" (QuantityIncrease)="onIncreaseQuantityOfCartItems($event)"
                         (QuantityDecrease)="onDecreaseQuantityOfCartItems($event)" (DeleteItem)="onDeleteItemFromCart($event)" [totalSum]="cartService.totalCost"
+                        [isEmptyCart]="cartService.isEmptyCart()"
                         [totalQuantity]="cartService.totalQuantity">
                     </app-cart-list>
                 </div>
