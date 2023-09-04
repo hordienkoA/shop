@@ -12,6 +12,7 @@ export class CartListComponent {
   @Input() cartItems!: Array<CartItem>;
   @Input() totalQuantity!: number;
   @Input() totalSum!: number;
+  // Обчно пишутся в нижнем регистре
   @Output() QuantityDecrease = new EventEmitter<CartItem>();
   @Output() QuantityIncrease = new EventEmitter<CartItem>();
   @Output() DeleteItem = new EventEmitter<CartItem>();

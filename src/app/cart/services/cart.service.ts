@@ -9,11 +9,11 @@ export class CartService {
 
   cart: Array<CartItem> = [];
 
-  public get totalCost(){
+  get totalCost(){
     return this.cart.map(el=>(el.product.price || 0 ) * el.quantity).reduce((acc, curr)=> acc + curr , 0);
   }
 
-  public get totalQuantity(){
+  get totalQuantity(){
     return this.cart.map(el=>el.quantity || 0).reduce((acc, curr)=> acc + curr , 0);
   }
 
