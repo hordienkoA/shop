@@ -1,8 +1,23 @@
+
 <h2>Cart</h2>
-<h3 *ngIf="isEmptyCart">Cart is empty</h3>
-<h4 *ngIf="!isEmptyCart">Total Sum: {{totalSum}} $, Total Quantity: {{totalQuantity}}</h4>
+<div *ngIf="isEmptyCart">
+  <h3 >Cart is empty</h3>
+  <h4 >Total Sum: {{totalSum | currency: 'USD'}}, Total Quantity: {{totalQuantity}}</h4>
+</div>
+
+<div >
+  <label for="sortOption">Sort by:</label>
+  <select id="sortOption" [(ngModel)]="selectedSortOption">
+    <option *ngFor="let option of sortOptions" [value]="option">{{ option.split('.').pop() }}</option>
+  </select>
+  <div>
+    <label for="ascending">Ascending:</label>
+    <input type="checkbox" id="ascending" [(ngModel)]="isAscending">
+  </div>
+</div>
+
 <ol>
-    <li *ngFor="let item of cartItems; trackBy: trackByItems">
+    <li *ngFor="let item of cartItems | orderBy: selectedSortOption:isAscending;  trackBy: trackByItems">
         <app-cart-item class="cart-item" [cartItem]="item" (QuantityIncrease)="onQuantityIncrease($event)"
             (QuantityDecrease)="onQuantityDecrease($event)" (DeleteItem)="onDeleteItem($event)"></app-cart-item>
         <br />

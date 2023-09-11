@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8">
-            <app-product-list [products]="productService.getProducts()"></app-product-list>
+            <app-product-list [products]="productService.getProducts() | async"></app-product-list>
         </div>
         <div class="col-md-4">
             <div class="cart-panel">

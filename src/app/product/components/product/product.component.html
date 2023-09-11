@@ -1,9 +1,9 @@
 <div class="card mb-4">
     <img alt="images will be in future" class="card-img-top">
     <div class="card-body">
-        <h5 class="card-title">{{product.name}}</h5>
+        <h5 class="card-title">{{product.name | uppercase}}</h5>
         <p class="card-text">{{product.description}}</p>
-        <p class="card-text">${{product.price}}</p>
+        <p class="card-text">{{product.price | currency: 'USD'}}</p>
         <p class="card-text">{{product.isAvailable? "Available" : "Not available"}}</p>
         <button class="btn" [ngClass]="{'btn-success':product.isAvailable}" [disabled]="!product.isAvailable" (click)="onAddToCard()">Buy</button>
 

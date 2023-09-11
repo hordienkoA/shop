@@ -5,7 +5,7 @@
                 <li class="list-group-item">
                     <h4>{{cartItem.product.name}}</h4>
                     <p>{{cartItem.product.description}}</p>
-                    <p><strong>${{cartItem.product.price}}</strong></p>
+                    <p><strong>{{cartItem.product.price | currency:'USD'}}</strong></p>
                 </li>
             </ul>
         </div>

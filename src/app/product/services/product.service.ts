@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 import { Category } from 'src/app/sample/models/category.enum';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class ProductService {
   ]
 
 
-  getProducts() {
-    return this.products;
+  getProducts(): Observable<Product[]> {
+    return of(this.products);
   }
 
 }

@@ -9,11 +9,11 @@ import { CartService } from 'src/app/cart/services/cart.service';
 
 export class ProductListComponent {
 
-  @Input() products!: Array<Product>;
-  
+  @Input() products!: Array<Product> | null;
+
   constructor(public cartService: CartService) {
-    
-    
+
+
   }
 
   onAddToCart(item: Product){
