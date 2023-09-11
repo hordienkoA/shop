@@ -41,3 +41,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
    - local-storage.service provides functionality for working with local storage
    - demo code in first.component to demonstrate functionality of services metioned above 
    - click-style.directive that can change font style of element when click event raises
+
+### [0.4-0] - 2023-09-11
+
+### Added
+    - order-pipe, that can order elements by specific field and set the direction of elements(asc, desc)
+    - some angular built-in pipe usages to make the interface more userfriendly
+    - sorting and ordering feature for products cart, using pipe mentioned above
+    - FormsModule and CommonModule import and export in shared-module. That module will be used in future to get acces for those mudules
+### Removed
+    - All imports and exports of FormsModule and CommonModule in other modules
