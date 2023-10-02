@@ -10,7 +10,7 @@ export class HighlightDirective {
   @HostBinding('style.backgroundColor') backgroundColor: string = '';
 
   @HostListener('mouseenter') onMouseEnter() {
-    this.backgroundColor = '#FFFFE0 !important';
+    this.backgroundColor = '#FFFFE0';
     this.el.nativeElement.style.cursor='pointer';
   }
 

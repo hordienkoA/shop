@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+      <div class="col-md-6">
+          <!-- Product Image -->
+          <img [src]="product.imagePath" alt="Product Image" class="product-image">
+      </div>
+      <div class="col-md-6">
+          <!-- Product Details -->
+          <div class="product-container">
+              <h1 class="product-title">{{product.name}}</h1>
+              <p class="product-description">{{product.description}}</p>
+              <p class="product-price">{{product.price | currency: 'USD'}}</p>
+              <button class="btn btn-primary add-to-cart-button" (click)="onAddToCart()">Add to Cart</button>
+          </div>
+      </div>
+  </div>
+</div>

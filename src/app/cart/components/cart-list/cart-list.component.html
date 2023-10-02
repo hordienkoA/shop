@@ -1,11 +1,14 @@
-
 <h2>Cart</h2>
-<div *ngIf="isEmptyCart">
-  <h3 >Cart is empty</h3>
-  <h4 >Total Sum: {{totalSum | currency: 'USD'}}, Total Quantity: {{totalQuantity}}</h4>
+<div *ngIf="!isEmptyCart; else emptyNotification">
+  <h4>Total Sum: {{totalSum | currency: 'USD'}}, Total Quantity: {{totalQuantity}}</h4>
 </div>
 
-<div >
+<ng-template #emptyNotification>
+  <h3 #emptyNotification>Cart is empty</h3>
+</ng-template>
+
+
+<div>
   <label for="sortOption">Sort by:</label>
   <select id="sortOption" [(ngModel)]="selectedSortOption">
     <option *ngFor="let option of sortOptions" [value]="option">{{ option.split('.').pop() }}</option>
@@ -17,10 +20,12 @@
 </div>
 
 <ol>
-    <li *ngFor="let item of cartItems | orderBy: selectedSortOption:isAscending;  trackBy: trackByItems">
-        <app-cart-item class="cart-item" [cartItem]="item" (QuantityIncrease)="onQuantityIncrease($event)"
-            (QuantityDecrease)="onQuantityDecrease($event)" (DeleteItem)="onDeleteItem($event)"></app-cart-item>
-        <br />
-        <br>
-    </li>
+  <li *ngFor="let item of cartItems | orderBy: selectedSortOption:isAscending;  trackBy: trackByItems">
+    <app-cart-item class="cart-item" [cartItem]="item" (QuantityIncrease)="onQuantityIncrease($event)"
+      (QuantityDecrease)="onQuantityDecrease($event)" (DeleteItem)="onDeleteItem($event)"></app-cart-item>
+    <br />
+    <br>
+  </li>
 </ol>
+
+<button class="btn btn-primary" (click)="navigateToOrder()" *ngIf="totalQuantity">Create order</button>

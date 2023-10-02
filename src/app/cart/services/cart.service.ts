@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Product } from 'src/app/product/models/product.model';
 import { CartItem } from '../models/cart-item.model';
+import { LocalStorageService } from 'src/app/core/services/local-storage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
+  localStorage = inject(LocalStorageService);
+  isDisplayed = false;
   private cartProducts: Array<CartItem> = [];
-
   get totalCost(){
     return this.cartProducts.map(el=>(el.product.price || 0 ) * el.quantity).reduce((acc, curr)=> acc + curr , 0);
   }
@@ -27,6 +29,8 @@ export class CartService {
       this.increaseQuantity(existingItem);
       return;
     }
+
+    this.localStorage.setItem(item.id?.toString() ?? ""   , `product ${item.name} was added at ${Date.now}`);
     this.cartProducts = [...this.cartProducts, (new CartItem(item, 1))];
 
   }
@@ -35,10 +39,13 @@ export class CartService {
     let existingItem = this.cartProducts.find(el=>el.product.id == item.id);
     if(!deleteItem && existingItem && existingItem.quantity>1){
       this.decreaseQuantity(existingItem);
+      this.localStorage.setItem(item.id?.toString() ?? ""   , `product ${item.name} was changed at ${Date.now}`);
     }
     else {
       this.cartProducts = this.cartProducts.filter(el=>el.product!== item);
+      this.localStorage.removeItem(item.id?.toString()?? "")
     }
+
   }
 
   private changeQuantity(index: number, newQuantity: number){
@@ -69,6 +76,7 @@ export class CartService {
 
   removeAllProducts(){
     this.cartProducts = [];
+    this.localStorage.clear();
   }
 
   isEmptyCart(): boolean{

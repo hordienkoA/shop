@@ -1,44 +1,63 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Category } from './sample/models/category.enum';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { ProductService } from './product/services/product.service';
 import { Product } from './product/models/product.model';
 import { CartService } from './cart/services/cart.service';
-import { CartItem } from './cart/models/cart-item.model';
+import { NavigationStart, Router, type RouterOutlet, type Event } from '@angular/router';
+import { type Subscription, filter } from 'rxjs'
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit, OnDestroy {
+
   title = 'shop';
   product!: Product;
+  cartService = inject(CartService);
+  productService = inject(ProductService);
+  private router = inject(Router);
+  private sub: {[key: string]: Subscription} = {};
 
   @ViewChild('appTitle', {static:false, read: ElementRef}) appTitle!: ElementRef<HTMLHeadingElement>;
 
-  constructor(public productService: ProductService, 
-              public cartService: CartService)
-  {
 
-  }
 
-  get cartItems(){
-    return this.cartService.getProducts();
-  }
   ngAfterViewInit() {
     if(this.appTitle){
       this.appTitle.nativeElement.textContent = "Shop";
     }
   }
 
-  onIncreaseQuantityOfCartItems(item: CartItem){
-    this.cartService.addProduct(item.product);
+  ngOnInit(): void {
+    this.setCartServiceOnRefresh();
   }
 
-  onDecreaseQuantityOfCartItems(item: CartItem){
-    this.cartService.removeProduct(item.product);
+  ngOnDestroy(): void {
+    this.sub['navigationStart'].unsubscribe();
   }
 
-  onDeleteItemFromCart(item: CartItem){
-    this.cartService.removeProduct(item.product, true);
+
+  onActivate($event: any, routerOutlet: RouterOutlet): void{
+    console.log('Activated Component', $event, routerOutlet);
   }
+
+  onDeactivate($event: any, routerOutlet: RouterOutlet): void{
+    console.log('Deactivated Component', $event, routerOutlet);
+  }
+
+  onDisplayCart(): void{
+    this.router.navigate([{outlets:{cart: ['cart']}}]);
+    this.cartService.isDisplayed = true;
+  }
+
+  private setCartServiceOnRefresh(): void {
+    this.sub['navigationStart'] = this.router.events
+      .pipe(filter((event: Event) => event instanceof NavigationStart))
+      .subscribe((event: Event) => {
+        this.cartService.isDisplayed = (event as NavigationStart).url.includes('cart:');
+      });
+
+}
+
 }

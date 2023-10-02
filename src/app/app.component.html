@@ -1,5 +1,47 @@
-<h1 #appTitle></h1>
-<div class="cart-panel">
+<div>
+  <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/products">Shop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+            <li class="nav-item" >
+              <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/products">Products</a>
+            </li>
+            <li class="nav-item" >
+              <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/admin/products">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLinkActive="active" aria-current="page" routerLink="/login">Login</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+        <div class="col-md-9">
+        <router-outlet #routerOutlet="outlet" (activate)="onActivate($event, routerOutlet)"
+        (deactivate)="onDeactivate($event, routerOutlet)">
+      </router-outlet>
+    </div>
+    <div class="col-md-3">
+      <button  class="btn btn-success" *ngIf="!cartService.isDisplayed" (click)="onDisplayCart()">Cart<span  *ngIf="cartService.totalQuantity as totalQuantity" class="badge badge-light">{{totalQuantity}}</span>
+      </button>
+      <router-outlet name="cart"></router-outlet>
+    </div>
+  </div>
+    </div>
+
+<!-- <div class="cart-panel">
     <button class="btn btn-primary cart-toggle" data-bs-toggle="collapse" data-bs-target="#firstPanel">
         First component
     </button>
@@ -30,4 +72,6 @@
         </div>
     </div>
 </div>
-<br>
+<br> -->
+</div>
+  </div>

@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CartItem } from '../../models/cart-item.model';
 import { HighlightDirective } from 'src/app/shared/directives/highlight.directive';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-list',
@@ -9,6 +10,8 @@ import { HighlightDirective } from 'src/app/shared/directives/highlight.directiv
 })
 
 export class CartListComponent {
+
+  private router = inject(Router);
   @Input() cartItems!: Array<CartItem>;
   @Input() totalQuantity!: number;
   @Input() totalSum!: number;
@@ -18,7 +21,6 @@ export class CartListComponent {
   @Output() DeleteItem = new EventEmitter<CartItem>();
 
   sortOptions = ['product.price', 'quantity', 'product.name'];
-
   selectedSortOption = this.sortOptions[0];
   isAscending = true;
   onQuantityIncrease(cartItem: CartItem){
@@ -33,4 +35,10 @@ export class CartListComponent {
     this.DeleteItem.emit(cartItem);
   }
   trackByItems(index: number, item: CartItem): string { return item.product.name; }
+
+  navigateToOrder(){
+    this.router.navigate(['/order']);
+  }
 }
+
+

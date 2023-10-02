@@ -1,0 +1,12 @@
+
+  <button class="btn btn-danger" (click)="onClose()">
+      Close
+  </button>
+
+  <div>
+      <app-cart-list [cartItems]="cartItems" (QuantityIncrease)="onIncreaseQuantityOfCartItems($event)"
+          (QuantityDecrease)="onDecreaseQuantityOfCartItems($event)" (DeleteItem)="onDeleteItemFromCart($event)" [totalSum]="cartService.totalCost"
+          [isEmptyCart]="cartService.isEmptyCart()"
+          [totalQuantity]="cartService.totalQuantity">
+      </app-cart-list>
+  </div>

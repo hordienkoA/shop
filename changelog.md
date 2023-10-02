@@ -42,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
    - demo code in first.component to demonstrate functionality of services metioned above 
    - click-style.directive that can change font style of element when click event raises
 
-### [0.4-0] - 2023-09-11
+### [0.4.0] - 2023-09-11
 
 ### Added
     - order-pipe, that can order elements by specific field and set the direction of elements(asc, desc)
@@ -51,3 +51,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - FormsModule and CommonModule import and export in shared-module. That module will be used in future to get acces for those mudules
 ### Removed
     - All imports and exports of FormsModule and CommonModule in other modules
+
+
+### [0.5.0]
+
+### Added
+    - routing module for app component and navbar with main links to pages
+    - cart routing that uses separate outlet to display anywhere on site
+    - product page that can be accessible when user click on each item in the product-list
+    - routing to order page once user clicks on "Create order" button of cart
+    - "user", "admin" roles and login page when we can pick one of them
+    - admin routing with guard to protect that part of functionality from not admin users
+### Removed
+    - First-component
+    - some functionality that can't be present with routing
