@@ -7,7 +7,7 @@ export class HighlightDirective {
 
   constructor(private el: ElementRef) { }
 
-  @HostBinding('style.backgroundColor') backgroundColor: string = '';
+  @HostBinding('style.backgroundColor') backgroundColor = '';
 
   @HostListener('mouseenter') onMouseEnter() {
     this.backgroundColor = '#FFFFE0';

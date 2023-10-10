@@ -24,7 +24,7 @@ export class CartService {
   }
 
   addProduct(item: Product){
-    let existingItem = this.cartProducts.find(el=>el.product.id == item.id);
+    const existingItem = this.cartProducts.find(el=>el.product.id == item.id);
     if(existingItem){
       this.increaseQuantity(existingItem);
       return;
@@ -35,8 +35,8 @@ export class CartService {
 
   }
 
-  removeProduct(item: Product, deleteItem: boolean = false){
-    let existingItem = this.cartProducts.find(el=>el.product.id == item.id);
+  removeProduct(item: Product, deleteItem = false){
+    const existingItem = this.cartProducts.find(el=>el.product.id == item.id);
     if(!deleteItem && existingItem && existingItem.quantity>1){
       this.decreaseQuantity(existingItem);
       this.localStorage.setItem(item.id?.toString() ?? ""   , `product ${item.name} was changed at ${Date.now}`);
@@ -57,7 +57,7 @@ export class CartService {
     }
   }
 
-  increaseQuantity(item: CartItem, amount: number = 1){
+  increaseQuantity(item: CartItem, amount = 1){
     const existingProductIndex = this.cartProducts.findIndex(p => p.product.id === item.product.id);
 
     if (existingProductIndex !== -1) {
@@ -65,7 +65,7 @@ export class CartService {
     }
   }
 
-  decreaseQuantity(item: CartItem, amount: number = 1){
+  decreaseQuantity(item: CartItem, amount = 1){
     const existingProductIndex = this.cartProducts.findIndex(p => p.product.id === item.product.id);
 
     if(existingProductIndex!== -1){

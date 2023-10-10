@@ -1,0 +1,43 @@
+{
+  "products":[
+    {
+      "id": 0,
+      "name": "IPhone X",
+      "description": "Phone",
+      "price": 1000,
+      "Category": "Category.Phone",
+      "isAvailable": true,
+      "imagePath": "/assets/images/apple-iphone.png"
+    },
+    {
+      "id": 1,
+      "name": "Samsung M52",
+      "description": "Phone",
+      "price": 400,
+      "Category": "Category.Phone",
+      "isAvailable": true,
+      "imagePath": "/assets/images/Galaxy-M52.png"
+    },
+    {
+      "id": 2,
+      "name": "Playstation 5",
+      "description": "Game Console(will be in future)",
+      "price": 800,
+      "Category": "Category.GameConsole",
+      "isAvailable": false,
+      "imagePath": "/assets/images/ps5.png"
+    },
+    {
+      "id": 3,
+      "name": "Playstation 4",
+      "description": "Game Console",
+      "price": 600,
+      "Category": "Category.GameConsole",
+      "isAvailable": true,
+      "imagePath": "/assets/images/ps4.png"
+    }
+  ],
+  "cart":[
+  ]
+}
+

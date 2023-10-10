@@ -13,5 +13,5 @@ export class AuthService {
 
   roleCheck(role: string): boolean{
     return this.selectedRole?.toLowerCase() === role?.toLowerCase();
-  };
+  }
 }

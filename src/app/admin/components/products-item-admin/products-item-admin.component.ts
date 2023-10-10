@@ -4,7 +4,7 @@ import { Product } from 'src/app/product';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'products-item-admin',
+  selector: 'app-products-item-admin',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './products-item-admin.component.html',

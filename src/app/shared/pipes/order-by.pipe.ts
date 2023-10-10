@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class OrderByPipe implements PipeTransform {
 
-  transform(array: any[], key: string, isAsc: boolean = true): any[] {
+  transform(array: any[], key: string, isAsc = true): any[] {
     if(!Array.isArray(array) || array.length<=1){
       return array;
     }
@@ -13,7 +13,7 @@ export class OrderByPipe implements PipeTransform {
     console.log("tsdfa");
     const compareFn = (a: any, b: any): number =>{
       const valueA = this.getItemByPath(a, key);
-      const valueB = this.getItemByPath(b, key);;
+      const valueB = this.getItemByPath(b, key);
 
       if(valueA< valueB){
         return isAsc ? -1:1;
