@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Product } from 'src/app/product/models/product.model';
 import { CartItem } from '../models/cart-item.model';
 import { LocalStorageService } from 'src/app/core/services/local-storage.service';
+import { CartObservableService } from './cart-observable.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,14 @@ import { LocalStorageService } from 'src/app/core/services/local-storage.service
 export class CartService {
 
   localStorage = inject(LocalStorageService);
+  cartObservableService = inject(CartObservableService);
   isDisplayed = false;
   private cartProducts: Array<CartItem> = [];
+
+  constructor() {
+     this.cartObservableService.getCart().subscribe(cart=>this.cartProducts = cart);
+  }
+
   get totalCost(){
     return this.cartProducts.map(el=>(el.product.price || 0 ) * el.quantity).reduce((acc, curr)=> acc + curr , 0);
   }
@@ -19,7 +26,7 @@ export class CartService {
     return this.cartProducts.map(el=>el.quantity || 0).reduce((acc, curr)=> acc + curr , 0);
   }
 
-  getProducts(){
+  getProducts(): CartItem[]{
     return this.cartProducts;
   }
 
@@ -31,7 +38,7 @@ export class CartService {
     }
 
     this.localStorage.setItem(item.id?.toString() ?? ""   , `product ${item.name} was added at ${Date.now}`);
-    this.cartProducts = [...this.cartProducts, (new CartItem(item, 1))];
+    this.cartObservableService.addProductToCart((new CartItem(null,item, 1))).subscribe(cart=>this.cartProducts = cart);
 
   }
 
@@ -41,42 +48,42 @@ export class CartService {
       this.decreaseQuantity(existingItem);
       this.localStorage.setItem(item.id?.toString() ?? ""   , `product ${item.name} was changed at ${Date.now}`);
     }
-    else {
-      this.cartProducts = this.cartProducts.filter(el=>el.product!== item);
+    else if(existingItem) {
+      this.cartObservableService.deleteFromCart(existingItem)
+      .subscribe(cart=> this.cartProducts = cart);
       this.localStorage.removeItem(item.id?.toString()?? "")
     }
 
   }
 
-  private changeQuantity(index: number, newQuantity: number){
-    if(newQuantity<=0){
-      this.cartProducts = this.cartProducts.filter((_, i) => i !== index);
-    }
-    else{
-      this.cartProducts = this.cartProducts.map((product, i) => (i === index ? { ...product, quantity: newQuantity } : product));
-    }
+  // private changeQuantity(index: number, newQuantity: number){
+  //   if(newQuantity<=0){
+  //     this.cartProducts = this.cartProducts.filter((_, i) => i !== index);
+  //   }
+  //   else{
+  //     this.cartProducts = this.cartProducts.map((product, i) => (i === index ? { ...product, quantity: newQuantity } : product));
+  //   }
+  // }
+
+  private changeQuantity(cartItem: CartItem){
+    this.cartObservableService.updateCartItem(cartItem).subscribe(cart=>this.cartProducts = cart);
   }
-
   increaseQuantity(item: CartItem, amount = 1){
-    const existingProductIndex = this.cartProducts.findIndex(p => p.product.id === item.product.id);
+    const existingProduct = this.cartProducts.find(p => p.id === item.id);
 
-    if (existingProductIndex !== -1) {
-      this.changeQuantity(existingProductIndex, this.cartProducts[existingProductIndex].quantity + amount);
+    if (existingProduct) {
+      existingProduct.quantity = existingProduct.quantity + amount;
+      this.changeQuantity(existingProduct);
     }
   }
 
   decreaseQuantity(item: CartItem, amount = 1){
-    const existingProductIndex = this.cartProducts.findIndex(p => p.product.id === item.product.id);
+    const existingProduct = this.cartProducts.find(p => p.id === item.id);
 
-    if(existingProductIndex!== -1){
-      this.changeQuantity(existingProductIndex, this.cartProducts[existingProductIndex].quantity - amount);
-
+    if(existingProduct){
+      existingProduct.quantity = existingProduct.quantity - amount;
+      this.changeQuantity(existingProduct);
     }
-  }
-
-  removeAllProducts(){
-    this.cartProducts = [];
-    this.localStorage.clear();
   }
 
   isEmptyCart(): boolean{

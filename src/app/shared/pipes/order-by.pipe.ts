@@ -10,7 +10,6 @@ export class OrderByPipe implements PipeTransform {
       return array;
     }
 
-    console.log("tsdfa");
     const compareFn = (a: any, b: any): number =>{
       const valueA = this.getItemByPath(a, key);
       const valueB = this.getItemByPath(b, key);

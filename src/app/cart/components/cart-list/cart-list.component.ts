@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CartItem } from '../../models/cart-item.model';
-import { HighlightDirective } from 'src/app/shared/directives/highlight.directive';
 import { Router } from '@angular/router';
+import { AppSettingsService } from 'src/app/core/services/app-settings.service';
 
 @Component({
   selector: 'app-cart-list',
@@ -9,9 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./cart-list.component.css'],
 })
 
-export class CartListComponent {
+export class CartListComponent implements OnInit {
+ 
 
   private router = inject(Router);
+  private appSettingsService = inject(AppSettingsService);
   @Input() cartItems!: Array<CartItem>;
   @Input() totalQuantity!: number;
   @Input() totalSum!: number;
@@ -21,8 +23,38 @@ export class CartListComponent {
   @Output() DeleteItem = new EventEmitter<CartItem>();
 
   sortOptions = ['product.price', 'quantity', 'product.name'];
-  selectedSortOption = this.sortOptions[0];
-  isAscending = true;
+  _selectedSortOption = this.sortOptions[0] || '';
+  _isAscending = true;
+
+  set isAscending(value: boolean){
+    this._isAscending = value;
+    const isAscConfig = this.appSettingsService.settings.find(el=> el.name == "isAscending");
+    if(isAscConfig){
+      isAscConfig.value = value.toString();
+      this.appSettingsService.storeSettings();
+    }
+  }
+
+  get isAscending(){
+    return this._isAscending
+  }
+  
+  set selectedSortOption(value: string){
+    this._selectedSortOption = value;
+    const selectedOption = this.appSettingsService.settings.find((el)=>el.name=="selectedSortOption");
+    if(selectedOption){
+      selectedOption.value = value;
+      this.appSettingsService.storeSettings();
+    }
+  }
+
+  get selectedSortOption(){
+    return this._selectedSortOption
+  }
+  ngOnInit(): void {
+    this.isAscending = this.appSettingsService.settings.find(el=> el.name == "isAscending")?.value == "true";
+    this.selectedSortOption = this.appSettingsService.settings.find((el)=>el.name=="selectedSortOption")?.value || this.sortOptions[0];
+  }
   onQuantityIncrease(cartItem: CartItem){
     this.QuantityIncrease.emit(cartItem);
   }

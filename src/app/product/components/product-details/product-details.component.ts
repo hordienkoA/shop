@@ -22,7 +22,6 @@ export class ProductDetailsComponent implements OnInit {
   @Input({ required: true }) productFromResolver: Product = new Product(null, '', '');
 
   ngOnInit(): void {
-    console.log("asdfasd");
     this.product = {...this.productFromResolver};
   }
 

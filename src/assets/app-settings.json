@@ -1,0 +1,20 @@
+{
+    "settings": [
+        {
+            "name": "Width",
+            "value": 1920
+        },
+        {
+            "name": "Height",
+            "value": 1080
+        },
+        {
+            "name": "isAscending",
+            "value": "false"
+        },
+        {
+            "name": "selectedSortOption",
+            "value": "quantity"
+        }
+    ]
+}

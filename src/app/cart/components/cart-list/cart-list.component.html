@@ -20,7 +20,7 @@
 </div>
 
 <ol>
-  <li *ngFor="let item of cartItems | orderBy: selectedSortOption:isAscending;  trackBy: trackByItems">
+  <li *ngFor="let item of cartItems  | orderBy: selectedSortOption:isAscending;  trackBy: trackByItems">
     <app-cart-item class="cart-item" [cartItem]="item" (QuantityIncrease)="onQuantityIncrease($event)"
       (QuantityDecrease)="onQuantityDecrease($event)" (DeleteItem)="onDeleteItem($event)"></app-cart-item>
     <br />

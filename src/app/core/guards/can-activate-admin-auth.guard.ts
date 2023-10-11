@@ -7,7 +7,6 @@ export const canActivateAdminAuthGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   const {url} = state;
-  console.log("ttt");
   if(authService.roleCheck("Admin")){
     return true;
   }

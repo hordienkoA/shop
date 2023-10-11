@@ -1,5 +1,5 @@
 {
-  "products":[
+  "products": [
     {
       "id": 0,
       "name": "IPhone X",
@@ -37,7 +37,28 @@
       "imagePath": "/assets/images/ps4.png"
     }
   ],
-  "cart":[
+  "cart": [
+    {
+      "id": 1,
+      "product": {
+        "id": 0,
+        "name": "IPhone X",
+        "description": "Phone",
+        "price": 1000,
+        "isAvailable": true
+      },
+      "quantity": 1
+    },
+    {
+      "id": 2,
+      "product": {
+        "id": 1,
+        "name": "Samsung M52",
+        "description": "Phone",
+        "price": 400,
+        "isAvailable": true
+      },
+      "quantity": 8
+    }
   ]
 }
-

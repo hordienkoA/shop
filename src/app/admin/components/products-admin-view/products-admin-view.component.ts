@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductService } from 'src/app/product/services/product.service';
 import { ProductsItemAdminComponent } from '../products-item-admin/products-item-admin.component';
+import { ProductsPromiseService } from 'src/app/product/services/poducts-promise.service';
 
 @Component({
   selector: 'app-products-admin-view',
@@ -11,6 +11,6 @@ import { ProductsItemAdminComponent } from '../products-item-admin/products-item
   styleUrls: ['./products-admin-view.component.css']
 })
 export class ProductsAdminViewComponent {
-  productsService = inject(ProductService);
+  productsService = inject(ProductsPromiseService);
 
 }

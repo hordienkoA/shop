@@ -39,7 +39,7 @@ export class FirstComponent implements OnInit {
   onLoadData() {
     const data = this.localStorageService.getItem('myKey');
     if (data) {
-      console.log(data);
+      console.log("Data found");
     } else {
       console.log('Data not found.');
     }

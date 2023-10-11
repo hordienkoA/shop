@@ -1,9 +1,9 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
-import { ProductService } from './product/services/product.service';
 import { Product } from './product/models/product.model';
 import { CartService } from './cart/services/cart.service';
 import { NavigationStart, Router, type RouterOutlet, type Event } from '@angular/router';
 import { type Subscription, filter } from 'rxjs'
+import { ProductsPromiseService } from './product';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,7 @@ export class AppComponent implements AfterViewInit, OnInit, OnDestroy {
   title = 'shop';
   product!: Product;
   cartService = inject(CartService);
-  productService = inject(ProductService);
+  productService = inject(ProductsPromiseService);
   private router = inject(Router);
   private sub: {[key: string]: Subscription} = {};
 
@@ -38,11 +38,11 @@ export class AppComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
 
-  onActivate($event: any, routerOutlet: RouterOutlet): void{
+  onActivate($event: Event, routerOutlet: RouterOutlet): void{
     console.log('Activated Component', $event, routerOutlet);
   }
 
-  onDeactivate($event: any, routerOutlet: RouterOutlet): void{
+  onDeactivate($event: Event, routerOutlet: RouterOutlet): void{
     console.log('Deactivated Component', $event, routerOutlet);
   }
 
