@@ -11,12 +11,10 @@ import { CartService } from 'src/app/cart/services/cart.service';
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.css']
 })
-export class ProductDetailsComponent implements OnInit {
+export class ProductDetailsComponent  {
 
   product!: Product;
 
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
   private cartService = inject(CartService);
 
   @Input({ required: true }) productFromResolver: Product = new Product(null, '', '');

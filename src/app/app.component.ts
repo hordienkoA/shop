@@ -16,8 +16,8 @@ export class AppComponent implements AfterViewInit, OnInit, OnDestroy {
   product!: Product;
   cartService = inject(CartService);
   productService = inject(ProductsPromiseService);
-  private router = inject(Router);
-  private sub: {[key: string]: Subscription} = {};
+  router = inject(Router);
+  sub: {[key: string]: Subscription} = {};
 
   @ViewChild('appTitle', {static:false, read: ElementRef}) appTitle!: ElementRef<HTMLHeadingElement>;
 

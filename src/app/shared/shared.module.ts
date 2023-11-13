@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HighlightDirective } from './directives/highlight.directive';
 import { ClickStyleDirective } from './directives/click-style.directive';
 import { OrderByPipe } from './pipes/order-by.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -15,14 +15,16 @@ import { FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     HighlightDirective,
     ClickStyleDirective,
     OrderByPipe,
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

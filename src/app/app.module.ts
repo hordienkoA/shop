@@ -15,6 +15,7 @@ import { AdminModule } from './admin/admin.module';
 import { AdminRoutingModule } from './admin/admin-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { httpInterceptorProviders } from './core/interceptors';
+import { RootStoreModule } from './core/@ngrx/root-store.module';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { httpInterceptorProviders } from './core/interceptors';
     AdminModule,
     AdminRoutingModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    RootStoreModule
   ],
   providers: [{
     provide: ConstantService,

@@ -1,13 +1,13 @@
 <div class="card mb-4">
-    <img alt="images will be in future" [src]="product.imagePath" class="card-img-top">
+    <img alt="images will be in future" [src]="product?.imagePath" class="card-img-top">
     <div class="card-body">
       <a (click)="onDetailClick()" class="btn btn-link">
-        <h5 class="card-title">{{product.name | uppercase}}</h5>
+        <h5 class="card-title">{{product?.name | uppercase}}</h5>
       </a>
-        <p class="card-text">{{product.description}}</p>
-        <p class="card-text">{{product.price | currency: 'USD'}}</p>
-        <p class="card-text">{{product.isAvailable? "Available" : "Not available"}}</p>
-        <button class="btn" [ngClass]="{'btn-success':product.isAvailable}" [disabled]="!product.isAvailable" (click)="onAddToCard()">Buy</button>
+        <p class="card-text">{{product?.description}}</p>
+        <p class="card-text">{{product?.price | currency: 'USD'}}</p>
+        <p class="card-text">{{product?.isAvailable? "Available" : "Not available"}}</p>
+        <button class="btn" id="buyBtn" [ngClass]="{'btn-success':product?.isAvailable}" [disabled]="!product?.isAvailable" (click)="onAddToCard()">Buy</button>
 
     </div>
 </div>

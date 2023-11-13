@@ -47,18 +47,7 @@
         "price": 1000,
         "isAvailable": true
       },
-      "quantity": 1
-    },
-    {
-      "id": 2,
-      "product": {
-        "id": 1,
-        "name": "Samsung M52",
-        "description": "Phone",
-        "price": 400,
-        "isAvailable": true
-      },
-      "quantity": 8
+      "quantity": 4
     }
   ]
 }
