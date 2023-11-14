@@ -25,22 +25,28 @@ describe('AppComponent', () => {
   }));
 
   beforeEach(() => {
+    //Arrange
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    //Act
     fixture.detectChanges();
   });
 
   it('should create the app', () => {
+    //Assert
     expect(component).toBeTruthy();
   });
 
 
   it('should navigate to cart and set cartService.isDisplayed to true when onDisplayCart is called', () => {
+    //Arrange
     spyOn(component.router, 'navigate');
     cartServiceSpy.isDisplayed = false;
 
+    //Act
     component.onDisplayCart();
 
+    //Assert
     expect(component.router.navigate).toHaveBeenCalledWith([{ outlets: { cart: ['cart'] } }]);
     expect(cartServiceSpy.isDisplayed).toBe(true);
   });

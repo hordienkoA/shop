@@ -29,11 +29,9 @@ export class OrderComponent {
       deliveryAddress: [''],
     });
 
-    // Добавление первого телефона
     this.addPhone();
   }
 
-  // Валидатор для имени пользователя (первая буква в верхнем регистре)
   capitalizeValidator(control: AbstractControl) {
     const value = control.value;
     if (value && value.length > 0) {
@@ -45,29 +43,24 @@ export class OrderComponent {
     return null;
   }
 
-  // Добавление контактного телефона
   addPhone() {
     const phones = this.orderForm.get('phones') as FormArray;
     phones.push(this.fb.control(''));
   }
 
-  // Удаление контактного телефона
   removePhone(index: number) {
     const phones = this.orderForm.get('phones') as FormArray;
     phones.removeAt(index);
   }
 
-  // Получение массива телефонов для удобства использования в шаблоне
   get phoneControls(): FormControl[] {
     return (this.orderForm.get('phones') as FormArray).controls as FormControl[];
   }
 
-  // Проверка, нужно ли показать поле адреса доставки
   showDeliveryAddress() {
     return this.orderForm.get('selfPickup')?.value === false;
   }
 
-  // Обработка отправки формы
   submitForm() {
     if (this.orderForm.valid) {
       console.log('Form submitted:', this.orderForm.value);
